@@ -6,7 +6,7 @@ using namespace std;
 #include "heap.h"
 
 // Constructor: Builds a heap from a given array a[] of given size 
-MinHeap::MinHeap(int cap) 
+MaxHeap::MaxHeap(int cap) 
 { 
     heap_size = 0; 
     capacity = cap; 
@@ -14,7 +14,7 @@ MinHeap::MinHeap(int cap)
 } 
 
 // Inserts a new key 'k' 
-void MinHeap::insert(int k) 
+void MaxHeap::insert(int k) 
 { 
     if (heap_size == capacity) 
     { 
@@ -30,9 +30,9 @@ void MinHeap::insert(int k)
 } 
 
 // Fix the min heap property if it is violated
-void MinHeap::percolateUp(int i) 
+void MaxHeap::percolateUp(int i) 
 { 
-    while (i != 0 && harr[parent(i)] > harr[i]) 
+    while (i != 0 && harr[parent(i)] < harr[i]) 
     { 
        swap(&harr[i], &harr[parent(i)]); 
        i = parent(i); 
@@ -40,10 +40,10 @@ void MinHeap::percolateUp(int i)
 }
 
 // Method to remove minimum element (or root) from min heap 
-int MinHeap::deleteMin() 
+int MaxHeap::deleteMax() 
 { 
     if (heap_size <= 0) 
-        return INT_MAX; 
+        return INT_MIN; 
     if (heap_size == 1) 
     { 
         heap_size--; 
@@ -63,23 +63,23 @@ int MinHeap::deleteMin()
 // A recursive method to heapify a subtree with the root at given index 
 // This method assumes that the subtrees are already heapified
 // PERCOLATE DOWN
-void MinHeap::percolateDown(int i) 
+void MaxHeap::percolateDown(int i) 
 { 
     int l = left(i); 
     int r = right(i); 
-    int smallest = i; 
-    if (l < heap_size && harr[l] < harr[i]) 
-        smallest = l; 
-    if (r < heap_size && harr[r] < harr[smallest]) 
-        smallest = r; 
-    if (smallest != i) 
+    int largest = i; 
+    if (l < heap_size && harr[l] > harr[i]) 
+        largest = l; 
+    if (r < heap_size && harr[r] > harr[largest]) 
+        largest = r; 
+    if (largest != i) 
     { 
-        swap(&harr[i], &harr[smallest]); 
-        percolateDown(smallest); 
+        swap(&harr[i], &harr[largest]); 
+        percolateDown(largest); 
     } 
 }
 
-void MinHeap::printHeap()
+void MaxHeap::printHeap()
 {
     cout << "\nFull Tree : \n";
     if (heap_size <= 0)
