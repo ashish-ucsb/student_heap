@@ -1,33 +1,26 @@
 // A C++ program to demonstrate common Binary Heap Operations 
 
 #include<iostream> 
-#include<climits> 
+#include<climits>
+#include<vector>
 using namespace std; 
 #include "heap.h"
 
 // Constructor: Builds a heap from a given array a[] of given size 
-MaxHeap::MaxHeap(int cap) 
+MaxHeap::MaxHeap(vector<int> v) 
 { 
-    heap_size = 0; 
-    capacity = cap; 
-    harr = new int[cap]; 
-} 
+    heap_size = v.size();
+    harr = new int[heap_size];
+    copy(v.begin(), v.end(), harr);
+}
 
-// Inserts a new key 'k' 
-void MaxHeap::insert(int k) 
-{ 
-    if (heap_size == capacity) 
-    { 
-        cout << "\nOverflow: Could not insert Key (capacity full)\n"; 
-        return; 
+void MaxHeap::buildHeap()
+{
+    for (int it = heap_size/2; it >= 0; it--)
+    {
+        percolateDown(it);
     }
-
-    // First insert the new key at the end 
-    heap_size++; 
-    int i = heap_size - 1; 
-    harr[i] = k; 
-    percolateUp(i);
-} 
+}  
 
 // Fix the min heap property if it is violated
 void MaxHeap::percolateUp(int i) 
@@ -84,7 +77,7 @@ void MaxHeap::printHeap()
     cout << "\nFull Tree : \n";
     if (heap_size <= 0)
     {
-        cout << "No Nodes\n";
+        cout << "Empty Tree\n";
     }
     if (heap_size > 0)
     {

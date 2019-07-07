@@ -1,20 +1,22 @@
 #include<iostream> 
-#include<climits> 
+#include<climits>
+#include<vector>
 using namespace std; 
 #include "heap.h"
 
 int main() 
 { 
-    MaxHeap h(11); 
-    h.insert(41);   
-    h.insert(15); 
-    h.insert(5); 
-    h.insert(4); 
-    h.insert(45);
-    h.insert(41); 
-    // cout << h.deleteMax() << " "; 
-    // cout << h.getMax() << " ";  
-    // cout << h.getMax();
+    vector<int> v;
+
+    for(int i=0; i<10; i++)
+    {
+       v.push_back(i);
+    }
+
+    MaxHeap h(v); 
+    h.buildHeap();
+
+    
     h.printHeap();
     return 0; 
 } 
