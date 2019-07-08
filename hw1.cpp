@@ -1,9 +1,9 @@
 #include<iostream>
 #include<vector>
-#include<numeric>
-#include<math.h>
-#include <bits/stdc++.h>
 #include <algorithm>
+#include<climits>
+#include <string>
+#include "heap.h"
 using namespace std;
 
 int main()
@@ -17,6 +17,10 @@ int main()
 	string score;
 	int space;
 
+	float sum = 0;
+	float max = -1;
+	string winner = " ";
+
 
 	// Takes Input from the uses, saves it in k, scores, names !
 	getline(cin, line);
@@ -26,7 +30,9 @@ int main()
 	while(getline(cin, line) && line_count<1)
 	{
 		if (line.empty())
+		{
     		line_count++;
+		}
     	else
     	{
     		space = line.find(' ');
@@ -50,22 +56,36 @@ int main()
     	}
 	}
 
-	cout << "K = " << k << endl;
-
-	cout << "Names:" << endl;
-	for (int i = 0; i < names.size(); i++)
-	{
-		cout << names[i] << endl;
-	}
-
-	cout << "Scores:" << endl;
+	// Calculating top k average score of a student, ignoring student with < k scores.
 	for (int i = 0; i < scores.size(); i++)
 	{
-		for (int j = 0; j < scores[i].size(); j++)
+		if (scores[i].size() >= k)
 		{
-			cout << scores[i][j]  << " ";
+			sum = 0;
+			MaxHeap h(scores[i]); 
+			h.buildHeap();
+			for (int j=0; j<k; j++)
+			{
+				sum += h.deleteMax();
+			}
+
+			sum = sum/k;
+
+			if (sum >= max)
+			{
+				max = sum;
+				winner = names[i];
+			}
 		}
-		cout << endl;
+	}
+
+	if (winner != " ")
+	{
+		cout << winner << endl;
+	}
+	else
+	{
+		cout << "Error : No student with k test scores" << endl;
 	}
 
 	return 0;

@@ -1,19 +1,18 @@
-// A C++ program to demonstrate common Binary Heap Operations 
-
 #include<iostream> 
 #include<climits>
 #include<vector>
 using namespace std; 
 #include "heap.h"
 
-// Constructor: Builds a heap from a given array a[] of given size 
-MaxHeap::MaxHeap(vector<int> v) 
+// Constructor: takes a int vector to build a max heap from
+MaxHeap::MaxHeap(std::vector<int> v) 
 { 
     heap_size = v.size();
     harr = new int[heap_size];
     copy(v.begin(), v.end(), harr);
 }
 
+// builds a max heap from a given vector (turned to array)
 void MaxHeap::buildHeap()
 {
     for (int it = heap_size/2; it >= 0; it--)
@@ -22,7 +21,7 @@ void MaxHeap::buildHeap()
     }
 }  
 
-// Fix the min heap property if it is violated
+// Fix the max heap property if it is violated
 void MaxHeap::percolateUp(int i) 
 { 
     while (i != 0 && harr[parent(i)] < harr[i]) 
@@ -32,7 +31,7 @@ void MaxHeap::percolateUp(int i)
     }
 }
 
-// Method to remove minimum element (or root) from min heap 
+// Method to delete maximum element (or root) from max heap 
 int MaxHeap::deleteMax() 
 { 
     if (heap_size <= 0) 
@@ -43,7 +42,7 @@ int MaxHeap::deleteMax()
         return harr[0]; 
     } 
   
-    // Store the minimum value, and remove it from heap 
+    // Store the maximum value, and remove it from heap 
     int root = harr[0]; 
     harr[0] = harr[heap_size-1]; 
     heap_size--; 
@@ -55,7 +54,6 @@ int MaxHeap::deleteMax()
   
 // A recursive method to heapify a subtree with the root at given index 
 // This method assumes that the subtrees are already heapified
-// PERCOLATE DOWN
 void MaxHeap::percolateDown(int i) 
 { 
     int l = left(i); 
@@ -72,6 +70,7 @@ void MaxHeap::percolateDown(int i)
     } 
 }
 
+// Prints the Heap
 void MaxHeap::printHeap()
 {
     cout << "\nFull Tree : \n";
