@@ -18,13 +18,13 @@ int main()
 	int space;
 
 	float sum = 0;
-	float max = -1;
+	float max = 0;
 	string winner = " ";
 
 
 	// Takes Input from the uses, saves it in k, scores, names !
 	getline(cin, line);
-	int k = stoi(line);
+	int k = atoi(line.c_str()); // int k = stoi(line);
 	int line_count = 0;
 
 	while(getline(cin, line) && line_count<1)
@@ -44,13 +44,13 @@ int main()
     		if (it != names.end()) // Element Found
     		{
     			int index = distance(names.begin(), it);
-    			(scores[index]).push_back(stoi(score));
+    			(scores[index]).push_back(atoi(score.c_str())); // (scores[index]).push_back(stoi(score));    			
     		}
     		else // Element Not Found
     		{
     			vector<int> temp;
     			names.push_back(name);
-    			temp.push_back(stoi(score));
+    			temp.push_back(atoi(score.c_str())); // temp.push_back(stoi(score));
     			scores.push_back(temp);
     		}
     	}
@@ -79,13 +79,20 @@ int main()
 		}
 	}
 
-	if (winner != " ")
+	if (k>0)
 	{
-		cout << winner << endl;
+		if (winner != " ")
+		{
+			cout << winner << endl;
+		}
+		else
+		{
+			cout << "Error : No student with " << k << " test scores" << endl;
+		}
 	}
 	else
 	{
-		cout << "Error : No student with k test scores" << endl;
+		cout << "Error : Invalid k = " << k << ", must be greater than 0" << endl;
 	}
 
 	return 0;
