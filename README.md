@@ -46,4 +46,4 @@ bob14
 
 `k_neg.txt`: Negative k.
 
- i_1000.txt : 1000 elements in a single heap.
+`i_1000.txt` : 1000 elements in a single heap.

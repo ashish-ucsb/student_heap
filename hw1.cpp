@@ -24,7 +24,7 @@ int main()
 
 	// Takes Input from the uses, saves it in k, scores, names !
 	getline(cin, line);
-        int k = stoi(line);
+	int k = stoi(line);
 	int line_count = 0;
 
 	while(getline(cin, line) && line_count<1)
